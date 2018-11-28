@@ -1,0 +1,45 @@
+{
+  "name": "s3-disk",
+  "version": "1.0.0",
+  "description": "Handles reads / writes on disk image files stored in S3.",
+  "author": "Alexis Svinartchouk <alexis@balena.io>",
+  "contributors": [
+    "Alexis Svinartchouk <alexis@balena.io>"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/balena-io-modules/s3-disk"
+  },
+  "bugs": {
+    "url": "https://github.com/balena-io-modules/s3-disk/issues"
+  },
+  "license": "Apache-2.0",
+  "main": "build/index.js",
+  "homepage": "https://github.com/balena-io-modules/s3-disk",
+  "scripts": {
+    "clean": "rm -rf build",
+    "compile": "npm run clean && tsc",
+    "prepublishOnly": "npm run compile",
+    "prettier": "prettier --config ./node_modules/resin-lint/config/.prettierrc --write \"src/*.ts\" \"typings/**/*.ts\" \"test/*.ts\"",
+    "lint": "resin-lint --typescript src typings test && tsc --noEmit",
+    "pretest": "./test/start_minio.sh",
+    "test": "npm run lint && mocha --require ts-node/register test/*.ts; ./test/stop_minio.sh"
+  },
+  "files": [
+    "build/*.js",
+    "build/*.js.map",
+    "build/*.d.ts"
+  ],
+  "types": "build/index.d.ts",
+  "devDependencies": {
+    "@types/mocha": "^5.2.5",
+    "mocha": "^5.2.0",
+    "resin-lint": "^2.0.1",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.6"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.39.0",
+    "file-disk": "^5.0.0"
+  }
+}
