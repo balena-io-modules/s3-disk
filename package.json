@@ -1,6 +1,6 @@
 {
   "name": "s3-disk",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Handles reads / writes on disk image files stored in S3.",
   "author": "Alexis Svinartchouk <alexis@balena.io>",
   "contributors": [
