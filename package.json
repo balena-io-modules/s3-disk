@@ -39,7 +39,7 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
-    "aws-sdk": "^2.39.0",
+    "aws-sdk": "^2.745.0",
     "file-disk": "^8.0.0"
   }
 }
