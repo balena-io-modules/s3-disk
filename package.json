@@ -35,8 +35,8 @@
     "@balena/lint": "^5.2.0",
     "@types/mocha": "^5.2.5",
     "mocha": "^5.2.0",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.1.6"
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
   },
   "dependencies": {
     "aws-sdk": "^2.745.0",
