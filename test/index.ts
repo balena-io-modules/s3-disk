@@ -200,90 +200,44 @@ describe('s3-disk', () => {
 		assert.strictEqual(discarded[1].start, 32);
 		assert.strictEqual(discarded[1].end, 10239);
 
-		const blockmap1 = await disk.getBlockMap(1, true);
-		assert.strictEqual(blockmap1.ranges.length, 2);
-		assert.strictEqual(
-			blockmap1.ranges[0].checksum,
-			sha256(createBuffer('1166669999999988888888')),
-		);
-		assert.strictEqual(
-			blockmap1.ranges[1].checksum,
-			sha256(createBuffer('44444477')),
-		);
+		const ranges1 = await disk.getRanges(1);
+		assert.deepEqual(ranges1, [
+			{ offset: 0, length: 22 },
+			{ offset: 24, length: 8 },
+		]);
 
-		const blockmap2 = await disk.getBlockMap(2, true);
-		assert.strictEqual(blockmap2.ranges.length, 2);
-		assert.strictEqual(
-			blockmap2.ranges[0].checksum,
-			sha256(createBuffer('1166669999999988888888')),
-		);
-		assert.strictEqual(
-			blockmap2.ranges[1].checksum,
-			sha256(createBuffer('44444477')),
-		);
+		const ranges2 = await disk.getRanges(2);
+		assert.deepEqual(ranges2, [
+			{ offset: 0, length: 22 },
+			{ offset: 24, length: 8 },
+		]);
 
-		const blockmap3 = await disk.getBlockMap(3, true);
-		assert.strictEqual(blockmap3.ranges.length, 1);
-		assert.strictEqual(
-			blockmap3.ranges[0].checksum,
-			sha256(createBuffer('116666999999998888888800444444770')),
-		);
+		const ranges3 = await disk.getRanges(3);
+		assert.deepEqual(ranges3, [{ offset: 0, length: 33 }]);
 
-		const blockmap4 = await disk.getBlockMap(4, true);
-		assert.strictEqual(blockmap4.ranges.length, 1);
-		assert.strictEqual(
-			blockmap4.ranges[0].checksum,
-			sha256(createBuffer('11666699999999888888880044444477')),
-		);
+		const ranges4 = await disk.getRanges(4);
+		assert.deepEqual(ranges4, [{ offset: 0, length: 32 }]);
 
-		const blockmap5 = await disk.getBlockMap(5, true);
-		assert.strictEqual(blockmap5.ranges.length, 1);
-		assert.strictEqual(
-			blockmap5.ranges[0].checksum,
-			sha256(createBuffer('11666699999999888888880044444477000')),
-		);
+		const ranges5 = await disk.getRanges(5);
+		assert.deepEqual(ranges5, [{ offset: 0, length: 35 }]);
 
-		const blockmap6 = await disk.getBlockMap(6, true);
-		assert.strictEqual(blockmap6.ranges.length, 1);
-		assert.strictEqual(
-			blockmap6.ranges[0].checksum,
-			sha256(createBuffer('116666999999998888888800444444770000')),
-		);
+		const ranges6 = await disk.getRanges(6);
+		assert.deepEqual(ranges6, [{ offset: 0, length: 36 }]);
 
-		const blockmap7 = await disk.getBlockMap(7, true);
-		assert.strictEqual(blockmap7.ranges.length, 1);
-		assert.strictEqual(
-			blockmap7.ranges[0].checksum,
-			sha256(createBuffer('11666699999999888888880044444477000')),
-		);
+		const ranges7 = await disk.getRanges(7);
+		assert.deepEqual(ranges7, [{ offset: 0, length: 35 }]);
 
-		const blockmap8 = await disk.getBlockMap(8, true);
-		assert.strictEqual(blockmap8.ranges.length, 1);
-		assert.strictEqual(
-			blockmap8.ranges[0].checksum,
-			sha256(createBuffer('11666699999999888888880044444477')),
-		);
+		const ranges8 = await disk.getRanges(8);
+		assert.deepEqual(ranges8, [{ offset: 0, length: 32 }]);
 
-		const blockmap9 = await disk.getBlockMap(9, true);
-		assert.strictEqual(blockmap9.ranges.length, 1);
-		assert.strictEqual(
-			blockmap9.ranges[0].checksum,
-			sha256(createBuffer('116666999999998888888800444444770000')),
-		);
+		const ranges9 = await disk.getRanges(9);
+		assert.deepEqual(ranges9, [{ offset: 0, length: 36 }]);
 
-		const blockmap10 = await disk.getBlockMap(10, true);
-		assert.strictEqual(blockmap10.ranges.length, 1);
-		assert.strictEqual(
-			blockmap10.ranges[0].checksum,
-			sha256(createBuffer('1166669999999988888888004444447700000000')),
-		);
+		const ranges10 = await disk.getRanges(10);
+		assert.deepEqual(ranges10, [{ offset: 0, length: 40 }]);
 
-		const blockmap11 = await disk.getBlockMap(11, true);
-		assert.strictEqual(blockmap11.ranges.length, 1);
-		assert.strictEqual(
-			blockmap11.ranges[0].checksum,
-			sha256(createBuffer('116666999999998888888800444444770')),
-		);
+		const ranges11 = await disk.getRanges(11);
+		assert.deepEqual(ranges11, [{ offset: 0, length: 33 }]);
 
 		// Test that disk.getStream() and the original image stream transformed by disk.getTransformStream() return the same streams.
 		if (disk.readOnly && disk.recordWrites) {
