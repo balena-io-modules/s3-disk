@@ -40,6 +40,6 @@
   },
   "dependencies": {
     "aws-sdk": "^2.39.0",
-    "file-disk": "^5.0.0"
+    "file-disk": "^8.0.0"
   }
 }
