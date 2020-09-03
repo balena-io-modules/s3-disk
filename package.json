@@ -33,8 +33,8 @@
   "types": "build/index.d.ts",
   "devDependencies": {
     "@balena/lint": "^5.2.0",
-    "@types/mocha": "^5.2.5",
-    "mocha": "^5.2.0",
+    "@types/mocha": "^8.0.3",
+    "mocha": "^8.1.3",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.2"
   },
